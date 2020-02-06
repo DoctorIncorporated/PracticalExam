@@ -1,4 +1,4 @@
-/*
+/* Done
     Setup this project to your GitHub repo you will be handing in a link of the completed project for the exam.
 
     Follow the instructions in the comments to setup this Express Application. 
@@ -13,15 +13,17 @@
     Don't forget to generate your pacjage.json file
 */
 
-/*
+/* Done
+  Also had to "npm install ejs@2.6.1 --save"
+  Because the newest version of ejs was producing errors
+
     Step One
     Make sure you have NodeJs installed and use NPM to install the following packages
     (hint: the names of these are how they should be reffered to when installing them)
     -express
     -morgan
     -zippity-do-dah (converts zip codes to lat and lon coordinates)
-    -forcast.io (returns weather info using lat and lon coordinates)
-
+    -forecast.io (returns weather info using lat and lon coordinates)
 */
 var path = require("path");
 var express = require("express");
@@ -30,48 +32,49 @@ var zipdb = require("zippity-do-dah");
 var ForecastIo = require("forecast.io");
 var app = express();
 
-/*
+/* Done
     Step 2 
     You will need an API Key to use forecast.io
     Sign up for an account and get your API Key here:
     https://darksky.net/dev
 */
 var options = {
-    APIKey: "ENTER YOUR API KEY HERE",
+    APIKey: "dc10a3366b12ae0d4e7d497599721e49",
     timeout: 1000
   };//configures the options for forecast.io
 
 var weather = new ForecastIo(options);//creates an instance of forecast.io
 
-/*
+/* Done
   Step 3
   Create a static route to the public folder.
   This will create a route to several essential JavaScript files and CSS files required for the app.
  */
-Your code here<----
-/*
+app.use(express.static(__dirname+'/public'));
+/* Done
   Step 4 
   Create a route to the views folder. 
   This folder has all the ejs files for the app.
 */
-Your code here<----
-/*
+app.use(express.static(__dirname+'/views'));
+/* Done
   Step 5 
   Set Morgan in dev mode so it logs all the requests to our server.
 */
-Your code here<----
-/*
+logger('dev');
+/* Done
   Step 6 
   Set your view engine to ejs.
 */
-Your code here<----
+app.set('view engine', 'ejs');
 
-/*
+/* Done
   Step 7 
   Use a get to render the index page
 */
-
-Your code here<----
+app.get('/', function(req, res){
+  res.render('index');
+});
 
 //===The get below takes the 5 digets from the zip code and converts it to latitude and longitude coordinates 
 //===It does this through an ajax request in a script in public/main.js
@@ -106,13 +109,16 @@ app.use(function(req, res) {
     res.status(404).render("404");
 });
 
-/*
+/* Done
     Step 8
     Setup the app to listen on port 3000 
 */
-Your code here<----
+var port = 2222;
+app.listen(port, function(){
+    console.log('Server is running on Port: ' + port);
+});
 
-/*
+/* Done
     Step 9 
     Configure your app to run using the command npm start
     hint(check your package.json file)
